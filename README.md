@@ -9,7 +9,8 @@ This project manages a pizza restaurant that receives orders for pizzas with dif
 - pymongo
 
 ## Installation
-1. Clone the repository
+1. Clone the repository 
+    https://github.com/af176/pizza-restaurant-management-system.git
 2. Build the Docker image
     $ cd pizza-restaurant-management-system
     $ docker build -t pizza-restaurant-management-system .
