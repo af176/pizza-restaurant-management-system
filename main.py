@@ -1,29 +1,23 @@
+import os
 import time
 from typing import List
 from pymongo import MongoClient
 
-orders = [{"id": 1, "dough_time": 7, "toppings": [{"id": 1, "time": 4}, {"id": 2, "time": 4}, ],
-           "cook_time": 10,
-           "serve_time": 5,
-           },
-          {
-              "id": 2,
-              "dough_time": 7,
-              "toppings": [
-                  {"id": 3, "time": 4},
-                  {"id": 4, "time": 4},
-              ],
-              "cook_time": 10,
-              "serve_time": 5,
-          }
-          ]
+from conf import orders
+from dotenv import load_dotenv
 
 
 def manage_pizza_restaurant(orders: List[dict]):
+    load_dotenv()
+
+    DB_URL = os.getenv("DB_URL", "mongodb://localhost:27017/")
+    DB_NAME = os.getenv("DB_NAME", "pizza_restaurant")
+    REPORT_COLLECTION = os.getenv("REPORT_COLLECTION", "reports")
+
     start_time = time.time()
-    client = MongoClient("mongodb://localhost:27017/")
-    db = client["pizza_restaurant"]
-    reports_collection = db["reports"]
+    client = MongoClient(DB_URL)
+    db = client[(DB_NAME)]
+    reports_collection = db[REPORT_COLLECTION]
 
     for order in orders:
         order_start_time = time.time()
@@ -77,3 +71,4 @@ def manage_pizza_restaurant(orders: List[dict]):
 
 if __name__ == '__main__':
     manage_pizza_restaurant(orders)
+
