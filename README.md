@@ -1,4 +1,3 @@
-# restaurant_manegment
 # Pizza Restaurant Management System
 
 ## Introduction
